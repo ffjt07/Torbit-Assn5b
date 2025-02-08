@@ -7,11 +7,14 @@ var errorNode = $(".error-win")
 var regSubmit = $("#reg-button");
 var regForm = $("#registration-form");
 var poll = $('input[name="poll"]');
+var session1 = $('input[name="session-1"]');
 var session2 = $('input[name="session-2"]');
+var session3 = $('input[name="session-3"]');
 var evolErrorMsg = "Cannot select any Pokémon Evolution sessions if Electric, Ground, Rock, Steel, Ice, Fighting Pokémon session is selected.";
 var legErrorMsg = "Cannot select Two Series Legendary Pokémon session unless Double Evolution session is also selected.";
 var errWinOpen = 'open';
 var errMsg = 'err';
+var formData = [];
 
 if (document.title === "Registration Form") {
     localStorage.setItem(errWinOpen, 'false');
@@ -110,12 +113,50 @@ function closeWin() {
         currWin.close();
 }
 
-function storeCookie() {
+function storeCookie(event) {
+    var name;
+    var value;
+    console.log($('input'));
+    event.preventDefault();
+    regForm.find('input[type=text]').each(function () {
+        name = $(this).attr('id');
+        value = $(this).val();
+        if (value !== "") {
+            formData.push({ name: name, value: value });
+        }
+    });
+    regForm.find('select').each(function () {
+        name = $(this).attr('id');
+        value = $(this).val();
+        formData.push({ name: name, value: value });
+    });
+    session1.each(function () {
+        if ($(this).is(":checked")) {
+            name = $(this).attr('name');
+            value = $(this).val();
+            formData.push({ name: name, value: value });
+        }
+    });
+    session2.each(function () {
+        if ($(this).is(":checked")) {
+            name = $(this).attr('name');
+            value = $(this).val();
+            formData.push({ name: name, value: value });
+        }
+    });
+    session3.each(function () {
+        if ($(this).is(":checked")) {
+            name = $(this).attr('name');
+            value = $(this).val();
+            formData.push({ name: name, value: value });
+        }
+    });
     
+    console.log(formData);
 }
 
-regForm.on('submit', function () {
-    storeCookie();
+regForm.on('submit', function (event) {
+    storeCookie(event);
 });
 
 type2.on('click', function () {

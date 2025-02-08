@@ -52,8 +52,8 @@
                <label for="city">City:<span class="req">*</span> </label>
                <input type="text" id="city" required placeholder="ex: Denver" value="Denver" title="City required" autocomplete="on" maxlength="30" pattern="[a-zA-Z]+"><br>
                <label for="state">State:<span class="req">*</span> </label>
-               <select id="state">
-                  <option value="null">Please Select a State</option>
+               <select id="state" required>
+                  <option value="">Please Select a State</option>
                   <option value="AL">Alabama</option>
                   <option value="AK">Alaska</option>
                   <option value="AZ">Arizona</option>
@@ -107,18 +107,18 @@
                   <option value="WY">Wyoming</option>
                </select><br>
                <label for="zip-code">Zip Code:<span class="req">*</span> </label>
-               <input type="text" required placeholder="ex: 11111" value="11111" title="Zip code required" autocomplete="on" maxlength="5" pattern="[0-9]{5}"><br>
+               <input id="zip-code" type="text" required placeholder="ex: 11111" value="11111" title="Zip code required" autocomplete="on" maxlength="5" pattern="[0-9]{5}"><br>
                <label for="phone">Telephone Number:<span class="req">*</span> </label>
-               <input type="tel" required placeholder="ex: 303-555-5555" value="303-555-5555" title="Phone number required: ###-###-####" autocomplete="on" maxlength="12" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"><br>
+               <input id="phone" type="tel" required placeholder="ex: 303-555-5555" value="303-555-5555" title="Phone number required: ###-###-####" autocomplete="on" maxlength="12" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"><br>
                <label for="email">Email:<span class="req">*</span> </label>
                <input id="email" type="email" required placeholder="example@example.com" value="example@example.com" title="Email required" autocomplete="on" maxlength="30"><br>
             </fieldset>
             <fieldset id="form-company">
                <h3>Company Information</h3>
                <label for="position">Position at Company:<span class="req">*</span> </label>
-               <input type="text" required placeholder="ex: Business Analyst" value="Business Analyst" title="Position title required" autocomplete="on" maxlength="30" pattern="[a-zA-Z0-9\s]+"><br>
+               <input id="position" type="text" required placeholder="ex: Business Analyst" value="Business Analyst" title="Position title required" autocomplete="on" maxlength="30" pattern="[a-zA-Z0-9\s]+"><br>
                <label for="company">Company Name:<span class="req">*</span> </label>
-               <input type="text" required placeholder="ex: Nintendo" value="Nintendo" title="Company Name required" autocomplete="on" maxlength="30" pattern="[a-zA-Z0-9\s]+"><br>
+               <input id="company" type="text" required placeholder="ex: Nintendo" value="Nintendo" title="Company Name required" autocomplete="on" maxlength="30" pattern="[a-zA-Z0-9\s]+"><br>
             </fieldset>
             <fieldset id="form-workshop">
                <h3>Workshops</h3>
@@ -131,9 +131,9 @@
                <label><input class="radio" type="radio" name="session-2" value="single" id="evol2">Single Evolution</label><br>
                <label><input class="radio" type="radio" name="session-2" value="double" id="evol3">Double Evolution</label><br>
                <p>Lengendary Pokémon</p>
-               <label><input class="radio" type="radio" name="session-3" value="no-evol" id="legend1" required>Elemental (Fire, Grass, Electric, Ice, Water, Ground)</label><br>
-               <label><input class="radio" type="radio" name="session-3" value="single" id="legend2">Two Series (White, Black, Sword, Shield, Pearl, Diamond)</label><br>
-               <label><input class="radio" type="radio" name="session-3" value="double" id="legend3">Other Legendary Pokémon</label><br>
+               <label><input class="radio" type="radio" name="session-3" value="elemental" id="legend1" required>Elemental (Fire, Grass, Electric, Ice, Water, Ground)</label><br>
+               <label><input class="radio" type="radio" name="session-3" value="two-series" id="legend2">Two Series (White, Black, Sword, Shield, Pearl, Diamond)</label><br>
+               <label><input class="radio" type="radio" name="session-3" value="other" id="legend3">Other Legendary Pokémon</label><br>
             </fieldset>
             <div>
                <input id="reg-button" type="submit" value="Register">
@@ -158,6 +158,7 @@
       </p>
    </footer>
    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
    <script src="./assets/js/logic.js"></script>
 </body>
 </html>
