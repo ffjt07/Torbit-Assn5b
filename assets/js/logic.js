@@ -110,6 +110,14 @@ function closeWin() {
         currWin.close();
 }
 
+function storeCookie() {
+    
+}
+
+regForm.on('submit', function () {
+    storeCookie();
+});
+
 type2.on('click', function () {
     workshopCheck();
 });
