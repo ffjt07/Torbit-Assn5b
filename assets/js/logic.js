@@ -6,6 +6,7 @@ var legend2 = $("#legend2");
 var errorNode = $(".error-win")
 var regSubmit = $("#reg-button");
 var regForm = $("#registration-form");
+var confId = $("#conf-id");
 var poll = $('input[name="poll"]');
 var session1 = $('input[name="session-1"]');
 var session2 = $('input[name="session-2"]');
@@ -165,11 +166,16 @@ function storeCookie(event) {
             formData += `|${name}: ${value}`;
         }
     });
-    Cookies.set(confKey, formData, { expires: 1 });
-    console.log(Cookies.get());
-    console.log(confKey);
-    console.log(formData);
+    Cookies.set(confKey, formData);
+    console.log(Cookies.get(confKey));
 }
+
+confId.blur(function () {
+    if (!$.isNumeric(confId.val()) || confId.val().length !== 6) {
+        alert("Conference ID must be a six-digit number. ex: 123456");
+        confId.val("");
+    }
+});
 
 regForm.on('submit', function (event) {
     storeCookie(event);
@@ -198,3 +204,4 @@ if (document.title === "Thank You") {
     localStorage.removeItem(errWinOpen);
     localStorage.removeItem(errMsg);
 }
+
