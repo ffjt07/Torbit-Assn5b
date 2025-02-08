@@ -14,7 +14,8 @@ var evolErrorMsg = "Cannot select any Pokémon Evolution sessions if Electric, G
 var legErrorMsg = "Cannot select Two Series Legendary Pokémon session unless Double Evolution session is also selected.";
 var errWinOpen = 'open';
 var errMsg = 'err';
-var formData = [];
+var confKey = ""
+var formData = "";
 
 if (document.title === "Registration Form") {
     localStorage.setItem(errWinOpen, 'false');
@@ -116,42 +117,57 @@ function closeWin() {
 function storeCookie(event) {
     var name;
     var value;
-    console.log($('input'));
     event.preventDefault();
     regForm.find('input[type=text]').each(function () {
         name = $(this).attr('id');
         value = $(this).val();
-        if (value !== "") {
-            formData.push({ name: name, value: value });
+        if (name === "conf-id") {
+            confKey = value;
+        }
+        else if (value !== "") {
+            if (name === "first-name") {
+                formData += `${name}: ${value}`;
+            }
+            else {
+                formData += `|${name}: ${value}`;
+            }
         }
     });
     regForm.find('select').each(function () {
         name = $(this).attr('id');
         value = $(this).val();
-        formData.push({ name: name, value: value });
+        formData += `|${name}:${value}`;
     });
     session1.each(function () {
         if ($(this).is(":checked")) {
             name = $(this).attr('name');
             value = $(this).val();
-            formData.push({ name: name, value: value });
+            formData += `|${name}: ${value}`;
         }
     });
-    session2.each(function () {
-        if ($(this).is(":checked")) {
-            name = $(this).attr('name');
-            value = $(this).val();
-            formData.push({ name: name, value: value });
-        }
-    });
+    if (evol1.attr('required')) {
+        session2.each(function () {
+            if ($(this).is(":checked")) {
+                name = $(this).attr('name');
+                value = $(this).val();
+                formData += `|${name}: ${value}`;
+            }
+        });
+    }
+    else {
+        formData += "|session-2: none";
+    }
+    
     session3.each(function () {
         if ($(this).is(":checked")) {
             name = $(this).attr('name');
             value = $(this).val();
-            formData.push({ name: name, value: value });
+            formData += `|${name}: ${value}`;
         }
     });
-    
+    Cookies.set(confKey, formData, { expires: 1 });
+    console.log(Cookies.get());
+    console.log(confKey);
     console.log(formData);
 }
 
