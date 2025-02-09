@@ -123,6 +123,9 @@ function storeCookie(event) {
             if (confId.val() === "") {
                 confKey = "123456";
             }
+            else {
+                confKey = value;
+            }
         }
         else if (value !== "") {
             if (name === "first-name") {
@@ -175,7 +178,6 @@ function storeCookie(event) {
         }
     });
     Cookies.set(confKey, formData);
-    console.log(Cookies.get(confKey));
 }
 
 function loadCookie(cookieKey) {
