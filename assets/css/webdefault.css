@@ -208,6 +208,17 @@ select {
   width: 325px;
 }
 
+.buttons {
+  background-color: red;
+  color: white;
+  font-size: 25px;
+  box-shadow: 0 5px 10px 0 rgb(144, 0, 0), 0 6px 20px 0 rgb(144, 0, 0);
+  border: red solid;
+  border-radius: 5px;
+  width: 125px;
+  margin: 15px;
+}
+
 /* IDs */
 #home {
   display: flex;
@@ -247,22 +258,6 @@ select {
 #vote-titles {
   text-align: center;
   font-weight: bolder;
-}
-
-#vote-link {
-  padding-bottom: 50px;
-  display: inline-block;
-  text-align: center;
-}
-
-#vote-link a {
-  padding: 5px;
-  color: white;
-  background-color: rgba(227, 0, 0, 0.859);
-  border-radius: 10px;
-  font-size: 2rem;
-  text-decoration: none;
-  box-shadow: 0.1rem 0.1rem 0.1rem rgb(144, 0, 0);
 }
 
 #act-list {
@@ -310,16 +305,6 @@ select {
   justify-content: center;
 }
 
-#reg-button {
-  background-color: white;
-  color: red;
-  font-size: 20px;
-  box-shadow: 0 5px 10px 0 #3f4249, 0 6px 20px 0 #3f4249;
-  border: red solid;
-  border-radius: 5px;
-  width: 100px;
-}
-
 #thank-you {
   display: flex;
   justify-content: center;
@@ -340,17 +325,6 @@ select {
   max-width: 500px;
 }
 
-#vote-btn {
-  background-color: red;
-  color: white;
-  font-size: 25px;
-  box-shadow: 0 5px 10px 0 rgb(144, 0, 0), 0 6px 20px 0 rgb(144, 0, 0);
-  border: red solid;
-  border-radius: 5px;
-  width: 100px;
-  margin: 15px;
-}
-
 /* Pseudo */
 nav a:hover {
   border-radius: 10px;
@@ -363,11 +337,12 @@ nav a:hover {
   text-shadow: none;
 }
 
-#vote-link a:hover {
-  box-shadow: none;
+.buttons:hover {
+  background-color: white;
+  color: red;
 }
 
-#vote-link a:active {
+.buttons:active {
   box-shadow: 0.3rem 0.3rem 0.3rem rgb(144, 0, 0) inset;
 }
 
@@ -390,25 +365,6 @@ nav a:hover {
    color: darkgoldenrod;
    font-weight: 600;
    box-shadow: 0 5px 10px 0 #3f4249, 0 6px 20px 0 #3f4249;
-}
-
-#reg-button:hover {
-  background-color: red;
-  color: white;
-  cursor: pointer;
-}
-
-#reg-button:active {
-  box-shadow: none;
-}
-
-#vote-btn:hover {
-  background-color: white;
-  color: red;
-}
-
-#vote-btn:active {
-  box-shadow: none;
 }
 
 /* Media */
