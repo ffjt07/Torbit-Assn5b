@@ -1,23 +1,22 @@
-var type2 = $('#type2');
-var evol1 = $('#evol1');
-var evol2 = $('#evol2');
-var evol3 = $('#evol3');
-var legend2 = $('#legend2');
-var errorNode = $('.error-win')
-var regSubmit = $('#reg-button');
-var regForm = $('#registration-form');
-var confId = $('#conf-id');
-var bulbCount = $('#bulb-count');
-var charCount = $('#char-count');
-var squirtCount = $('#squirt-count');
-var voteButton = $('#vote-btn');
-var pollCountClass = $('.poll-counter')
-var poll = $('input[name="poll"]');
-var session1 = $('input[name="session-1"]');
-var session2 = $('input[name="session-2"]');
-var session3 = $('input[name="session-3"]');
-var evolErrorMsg = "Cannot select any Pokémon Evolution sessions if Electric, Ground, Rock, Steel, Ice, Fighting Pokémon session is selected.";
-var legErrorMsg = "Cannot select Two Series Legendary Pokémon session unless Double Evolution session is also selected.";
+const type2 = $('#type2');
+const evol1 = $('#evol1');
+const evol2 = $('#evol2');
+const evol3 = $('#evol3');
+const legend2 = $('#legend2');
+const errorNode = $('.error-win')
+const regSubmit = $('#reg-button');
+const regForm = $('#registration-form');
+const confId = $('#conf-id');
+const bulbCount = $('#bulb-count');
+const charCount = $('#char-count');
+const squirtCount = $('#squirt-count');
+const pollCountClass = $('.poll-counter')
+const poll = $('input[name="poll"]');
+const session1 = $('input[name="session-1"]');
+const session2 = $('input[name="session-2"]');
+const session3 = $('input[name="session-3"]');
+const evolErrorMsg = "Cannot select any Pokémon Evolution sessions if Electric, Ground, Rock, Steel, Ice, Fighting Pokémon session is selected.";
+const legErrorMsg = "Cannot select Two Series Legendary Pokémon session unless Double Evolution session is also selected.";
 var errWinOpen = 'open';
 var errMsg = 'err';
 var confKey = ""
@@ -72,7 +71,6 @@ function errWindow(workshop) {
     let top = topOffset + (outerHeight - winHeight) / 2;
     let left = leftOffset + (outerWidth - winWidth) / 2;
     let regerrorUrl = "regerror.html";
-    let legenderrorUrl = "legenderror.html";
     let windowParams = `resizable=no,loacation=yes,width=${winWidth}, height=${winHeight}, left=${left}, top=${top}`;
     var errorWindow = window;
 
@@ -113,7 +111,7 @@ function closeWin() {
     currWin.close();
 }
 
-function storeCookie(event) {
+function storeCookie() {
     var name;
     var value;
     regForm.find('input[type=text]').each(function () {
@@ -182,7 +180,7 @@ function storeCookie(event) {
 
 function loadCookie(cookieKey) {
     var cookieValue = Cookies.get(cookieKey);
-    var tempArray = [];
+    var tempArray;
     var delimeter = "|";
     var seperator = ":";
     var tempData;
@@ -294,8 +292,8 @@ confId.blur(function () {
     loadCookie(confId.val());
 });
 
-regForm.on('submit', function (event) {
-    storeCookie(event);
+regForm.on('submit', function () {
+    storeCookie();
 });
 
 type2.on('click', function () {

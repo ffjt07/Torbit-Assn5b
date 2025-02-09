@@ -286,11 +286,6 @@ select {
   padding: 0;
 }
 
-#schedule {
-  display: inline-flexbox;
-  flex-shrink: inherit;
-}
-
 #schedule td {
   border: none;
   border-bottom: #3f4249 solid;
