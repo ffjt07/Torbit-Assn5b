@@ -317,9 +317,11 @@ regSubmit.on('click', function () {
     evolCheck();
 });
 
-if (document.title === "Thank You") {
-    localStorage.removeItem(errWinOpen);
-    localStorage.removeItem(errMsg);
+if (document.title !== "Registration Form") {
+    if (document.title !== "Session Error") {
+        localStorage.removeItem(errWinOpen);
+        localStorage.removeItem(errMsg);
+    } 
 }
 
 if (document.title === "Poll") {
