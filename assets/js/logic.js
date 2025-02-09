@@ -17,6 +17,7 @@ var errWinOpen = 'open';
 var errMsg = 'err';
 var confKey = ""
 var formData = "";
+var cookieData = {};
 
 if (document.title === "Registration Form") {
     localStorage.setItem(errWinOpen, 'false');
@@ -123,14 +124,16 @@ function storeCookie(event) {
         name = $(this).attr('id');
         value = $(this).val();
         if (name === "conf-id") {
-            confKey = value;
+            if (confId.val() === "") {
+                confKey = "123456";
+            }
         }
         else if (value !== "") {
             if (name === "first-name") {
-                formData += `${name}: ${value}`;
+                formData += `${name}:${value}`;
             }
             else {
-                formData += `|${name}: ${value}`;
+                formData += `|${name}:${value}`;
             }
         }
     });
@@ -143,7 +146,7 @@ function storeCookie(event) {
         if ($(this).is(":checked")) {
             name = $(this).attr('name');
             value = $(this).val();
-            formData += `|${name}: ${value}`;
+            formData += `|${name}:${value}`;
         }
     });
     if (evol1.attr('required')) {
@@ -151,7 +154,7 @@ function storeCookie(event) {
             if ($(this).is(":checked")) {
                 name = $(this).attr('name');
                 value = $(this).val();
-                formData += `|${name}: ${value}`;
+                formData += `|${name}:${value}`;
             }
         });
     }
@@ -163,17 +166,40 @@ function storeCookie(event) {
         if ($(this).is(":checked")) {
             name = $(this).attr('name');
             value = $(this).val();
-            formData += `|${name}: ${value}`;
+            formData += `|${name}:${value}`;
         }
     });
     Cookies.set(confKey, formData);
     console.log(Cookies.get(confKey));
 }
 
+function loadCookie(cookieKey) {
+    var cookieValue = Cookies.get(cookieKey);
+    var tempArray = [];
+    var delimeter = "|";
+    var seperator = ":";
+    var tempData;
+    var inputName;
+    var inputValue;
+
+    tempArray = cookieValue.split(delimeter);
+    $.each(tempArray, function (index, value) {
+        tempData = value.split(seperator);
+        if (tempData.length === 2) {
+            inputName = tempData[0];
+            inputValue = tempData[1];
+            cookieObject[inputName] = inputValue;
+        }
+    });
+}
+
 confId.blur(function () {
     if (!$.isNumeric(confId.val()) || confId.val().length !== 6) {
         alert("Conference ID must be a six-digit number. ex: 123456");
         confId.val("");
+    }
+    else {
+        loadCookie(confId.val());
     }
 });
 
