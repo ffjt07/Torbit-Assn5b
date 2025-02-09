@@ -187,7 +187,6 @@ function loadCookie(cookieKey) {
     var inputName;
     var inputValue;
     var name;
-    console.log(Cookies.get());
 
     tempArray = cookieValue.split(delimeter);
     $.each(tempArray, function (index, value) {
@@ -260,7 +259,6 @@ function thankYouAlert() {
             }
             else {
                 currentCount = JSON.parse(localStorage.getItem(countId));
-                console.log(currentCount);
             }
             currentCount++;
             localStorage.setItem(countId, JSON.stringify(currentCount));
