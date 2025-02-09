@@ -440,6 +440,10 @@ nav a:hover {
     max-width: 135px;
   }
 
+  .act-video-sect {
+    width: 100%;
+  }
+
   #schedule {
     font-size: 10px;
   }
