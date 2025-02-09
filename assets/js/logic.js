@@ -1,12 +1,17 @@
 var type2 = $('#type2');
 var evol1 = $('#evol1');
 var evol2 = $('#evol2');
-var evol3 = $("#evol3");
-var legend2 = $("#legend2");
-var errorNode = $(".error-win")
-var regSubmit = $("#reg-button");
-var regForm = $("#registration-form");
-var confId = $("#conf-id");
+var evol3 = $('#evol3');
+var legend2 = $('#legend2');
+var errorNode = $('.error-win')
+var regSubmit = $('#reg-button');
+var regForm = $('#registration-form');
+var confId = $('#conf-id');
+var bulbCount = $('#bulb-count');
+var charCount = $('#char-count');
+var squirtCount = $('#squirt-count');
+var voteButton = $('#vote-btn');
+var pollCountClass = $('.poll-counter')
 var poll = $('input[name="poll"]');
 var session1 = $('input[name="session-1"]');
 var session2 = $('input[name="session-2"]');
@@ -102,14 +107,6 @@ function evolCheck() {
     }
 }
 
-function thankYouAlert() {
-    poll.each(function () {
-        if ($(this).is(":checked")) {
-            alert("Thank you for voting for: " + $(this).val());
-        }
-    });
-}
-
 function closeWin() {
     let currWin = open(location, '_self');
     localStorage.setItem(errWinOpen, 'false');
@@ -119,7 +116,6 @@ function closeWin() {
 function storeCookie(event) {
     var name;
     var value;
-    event.preventDefault();
     regForm.find('input[type=text]').each(function () {
         name = $(this).attr('id');
         value = $(this).val();
@@ -245,6 +241,26 @@ function loadCookie(cookieKey) {
     }
 }
 
+function thankYouAlert() {
+    poll.each(function () {
+        if ($(this).is(":checked")) {
+            alert("Thank you for voting for: " + $(this).val());
+        }
+    });
+}
+
+function renderPollCount() {
+    var localKey;
+    pollCountClass.find('span-id').each(function () {
+        for (var i = 0; i < localStorage.length; i++) {
+            localKey = localStorage.key(i);
+            if (localKey === $(this).attr('id')) {
+                $(this).text(localStorage.getItem(localKey));
+            }
+        }
+    });
+}
+
 confId.blur(function () {
     loadCookie(confId.val());
 });
@@ -277,3 +293,6 @@ if (document.title === "Thank You") {
     localStorage.removeItem(errMsg);
 }
 
+if (document.title === "Poll") {
+    renderPollCount();
+}
