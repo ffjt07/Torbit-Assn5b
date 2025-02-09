@@ -71,7 +71,7 @@ function errWindow(workshop) {
     let top = topOffset + (outerHeight - winHeight) / 2;
     let left = leftOffset + (outerWidth - winWidth) / 2;
     let regerrorUrl = "regerror.html";
-    let windowParams = `resizable=no,loacation=yes,width=${winWidth}, height=${winHeight}, left=${left}, top=${top}`;
+    let windowParams = `resizable=no,location=yes,width=${winWidth}, height=${winHeight}, left=${left}, top=${top}`;
     var errorWindow = window;
 
     localStorage.setItem(errWinOpen, 'true');
