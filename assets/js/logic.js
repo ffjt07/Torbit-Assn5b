@@ -34,7 +34,7 @@ if (document.title === "Session Error") {
         errorNode.prepend(h3el);
     }
 }
-    
+
 function workshopCheck() {
     if (type2.is(":checked")) {
         if (sessionTwoCheck() === true) {
@@ -70,7 +70,7 @@ function errWindow(workshop) {
     let legenderrorUrl = "legenderror.html";
     let windowParams = `resizable=no,loacation=yes,width=${winWidth}, height=${winHeight}, left=${left}, top=${top}`;
     var errorWindow = window;
-    
+
     localStorage.setItem(errWinOpen, 'true');
     if (workshop === "B") {
         localStorage.setItem(errMsg, 'B');
@@ -111,9 +111,9 @@ function thankYouAlert() {
 }
 
 function closeWin() {
-        let currWin = open(location, '_self');
-        localStorage.setItem(errWinOpen, 'false');
-        currWin.close();
+    let currWin = open(location, '_self');
+    localStorage.setItem(errWinOpen, 'false');
+    currWin.close();
 }
 
 function storeCookie(event) {
@@ -137,6 +137,16 @@ function storeCookie(event) {
             }
         }
     });
+    regForm.find('input[type=tel').each(function () {
+        name = $(this).attr('id');
+        value = $(this).val();
+        formData += `|${name}:${value}`;
+    });
+    regForm.find('input[type=email]').each(function () {
+        name = $(this).attr('id');
+        value = $(this).val();
+        formData += `|${name}:${value}`;
+    });
     regForm.find('select').each(function () {
         name = $(this).attr('id');
         value = $(this).val();
@@ -159,9 +169,8 @@ function storeCookie(event) {
         });
     }
     else {
-        formData += "|session-2: none";
+        formData += "|session-2:none";
     }
-    
     session3.each(function () {
         if ($(this).is(":checked")) {
             name = $(this).attr('name');
@@ -181,6 +190,8 @@ function loadCookie(cookieKey) {
     var tempData;
     var inputName;
     var inputValue;
+    var name;
+    console.log(Cookies.get());
 
     tempArray = cookieValue.split(delimeter);
     $.each(tempArray, function (index, value) {
@@ -188,19 +199,54 @@ function loadCookie(cookieKey) {
         if (tempData.length === 2) {
             inputName = tempData[0];
             inputValue = tempData[1];
-            cookieObject[inputName] = inputValue;
+            cookieData[inputName] = inputValue;
         }
     });
+    if (!cookieData.isEmpty) {
+        regForm.find('input[type=text]').each(function () {
+            name = $(this).attr('id');
+            if (name in cookieData) {
+                $(this).val(cookieData[name]);
+            }
+        });
+        regForm.find('input[type=tel]').each(function () {
+            name = $(this).attr('id');
+            $(this).val(cookieData[name]);
+        });
+        regForm.find('input[type=email]').each(function () {
+            name = $(this).attr('id');
+            $(this).val(cookieData[name]);
+        });
+        regForm.find('select').each(function () {
+            name = $(this).attr('id');
+            $(this).val(cookieData[name]);
+        });
+        session1.each(function () {
+            name = $(this).attr('name');
+            if ($(this).attr('value') === cookieData[name]) {
+                $(this).prop("checked", true);
+            }
+        });
+        session2.each(function () {
+            name = $(this).attr('name');
+            if (cookieData[name] === "none") {
+                return false;
+            }
+            else if ($(this).attr('value') === cookieData[name]) {
+                $(this).prop("checked", true);
+            }
+        });
+        session3.each(function () {
+            name = $(this).attr('name');
+            if ($(this).attr('value') === cookieData[name]) {
+                $(this).prop("checked", true);
+            }
+        });
+    }
 }
 
 confId.blur(function () {
-    if (!$.isNumeric(confId.val()) || confId.val().length !== 6) {
-        alert("Conference ID must be a six-digit number. ex: 123456");
-        confId.val("");
-    }
-    else {
-        loadCookie(confId.val());
-    }
+    loadCookie(confId.val());
 });
 
 regForm.on('submit', function (event) {
