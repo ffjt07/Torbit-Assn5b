@@ -242,8 +242,30 @@ function loadCookie(cookieKey) {
 }
 
 function thankYouAlert() {
+    var countId;
+    var currentCount;
     poll.each(function () {
         if ($(this).is(":checked")) {
+            if ($(this).attr('id') === "bulbasaur") {
+                countId = bulbCount.attr('id');
+            }
+            else if ($(this).attr('id') === "charmander") {
+                countId = charCount.attr('id');
+            }
+            else {
+                countId = squirtCount.attr('id');
+            }
+            if (JSON.parse(localStorage.getItem(countId)) === null) {
+                currentCount = 0;
+            }
+            else {
+                currentCount = JSON.parse(localStorage.getItem(countId));
+                console.log(currentCount);
+            }
+            currentCount++;
+            localStorage.setItem(countId, JSON.stringify(currentCount));
+            renderPollCount();
+            
             alert("Thank you for voting for: " + $(this).val());
         }
     });
@@ -251,11 +273,17 @@ function thankYouAlert() {
 
 function renderPollCount() {
     var localKey;
-    pollCountClass.find('span-id').each(function () {
+    var currentCount;
+    pollCountClass.find('span').each(function () {
+        if (localStorage.length === 0 || localStorage.getItem($(this).attr('id')) === null) {
+            $(this).text(0);
+        }
+        // else if (localStorage.getItem($(this).attr('id')) === null)
         for (var i = 0; i < localStorage.length; i++) {
             localKey = localStorage.key(i);
             if (localKey === $(this).attr('id')) {
-                $(this).text(localStorage.getItem(localKey));
+                currentCount = JSON.parse(localStorage.getItem(localKey));
+                $(this).text(currentCount);
             }
         }
     });
