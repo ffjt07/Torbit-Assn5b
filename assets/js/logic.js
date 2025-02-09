@@ -280,7 +280,6 @@ function renderPollCount() {
         if (localStorage.length === 0 || localStorage.getItem($(this).attr('id')) === null) {
             $(this).text(0);
         }
-        // else if (localStorage.getItem($(this).attr('id')) === null)
         for (var i = 0; i < localStorage.length; i++) {
             localKey = localStorage.key(i);
             if (localKey === $(this).attr('id')) {
